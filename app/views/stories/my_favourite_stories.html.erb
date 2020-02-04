@@ -1,0 +1,33 @@
+<% if @stories.present? %>
+    <div class="content_5">
+      <table id="stories" class ="fixed_header table-bordered table-striped">
+        <thead>
+        <%if !@stories.blank?%>
+          <tr>
+            <th>Title</th>
+            <th>Body<th>
+            <th>Author</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <%end%>
+        </thead>
+
+        <tbody>
+            <% unless @stories.blank?
+            @stories.each do |story| %>
+            <tr>
+              <td><%= story.title %></td>
+              <td><%= story.body %></td>
+              <td><%= story.user.email %></td>
+            </tr>
+          <% end 
+          end %>
+        </tbody>
+      </table>
+      <%= link_to '<button type="button">My Story</button>'.html_safe, my_stories_path %>
+      <%= link_to '<button type="button">Others Story</button>'.html_safe, view_all_stories_path %>
+    </div>
+<% else %>
+   <p> Stories not added by other users </p>    
+<% end %>

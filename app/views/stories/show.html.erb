@@ -1,0 +1,22 @@
+<%= link_to 'Had Another Story', new_story_path %>
+
+<div class="title_back" text="center">
+  <h5 class="title_6">Story Details</h5>
+</div>
+<div class="content_6">
+  <p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="col" text="center">
+      <p>
+        <strong>Title:</strong>
+        <%= @story.title %>
+      </p>
+        <strong>Body:</strong>
+        <%= @story.body %>
+      <p>
+    </div>
+  </div>
+</div>
+  <td><%= link_to 'Edit', edit_story_path(@story) %></td>
+  <td><%= link_to 'Destroy', @story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <td><%= link_to 'Back', my_stories_path, class: "back1" %></td>

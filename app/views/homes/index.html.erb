@@ -1,0 +1,40 @@
+<% if current_user %>
+   <% if @stories.present? %>
+        <div class="content_5">
+        <table id="stories" class ="fixed_header table-bordered table-striped">
+            <thead>
+            <%if !@stories.blank?%>
+            <tr>
+                <th>Title</th>
+                <th>Body<th>
+                <th>Author<th>
+            </tr>
+            <%end%>
+            </thead>
+
+            <tbody>
+                <% unless @stories.blank?
+                @stories.each do |story| %>
+                <tr>
+                <td><%= story.title %></td>
+                <td><%= story.body %></td>
+                <td><%= story.user.email %></td>
+                <% if check_mark_as_favourite(current_user.id, story.id) %>
+                <% else %>
+                  <td> <%= link_to "Mark As Favourite", mark_as_favourite_path(story_id: story.id), method: :post %> </td>
+                <% end %>                
+             </tr>
+            <% end 
+            end %>
+            </tbody>
+        </table>
+        <%= link_to '<button type="button">My Story</button>'.html_safe, my_stories_path %>
+        <%= link_to '<button type="button">My favourite Story</button>'.html_safe, my_favourite_stories_path %>
+
+        </div>
+    <% else %>
+        <p> Stories not added by other users </p>    
+    <% end %>    
+<% else %>  
+    <p>Please login to views stories <p>      
+<% end %> 

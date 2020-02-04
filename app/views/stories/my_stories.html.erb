@@ -1,0 +1,39 @@
+<%= link_to '<button type="button">Others Story</button>'.html_safe, view_all_stories_path %>
+<%= link_to '<button type="button">My favourite Story</button>'.html_safe, my_favourite_stories_path %>
+<%= link_to 'New Story', new_story_path %>
+  <% if @stories.present? %>
+    <div class="table-responsive">
+    <div class="content_5">
+      <table class ="fixed_header table-bordered table-striped">
+        <thead>
+        <%if !@stories.blank?%>
+          <tr>
+            <th>Title</th>
+            <th>Body</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <%end%>
+        </thead>
+
+        <tbody>
+            <% unless @stories.blank?
+            @stories.each do |story| %>
+            <tr>
+              <td><%= story.title %></td>
+              <td><%= story.body %></td>
+              <td><%= link_to 'Show', story %></td>
+              <td><%= link_to 'Edit', edit_story_path(story) %></td>
+              <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end 
+          end %>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    </div>
+  <% else %>
+    <p>Stories not added </p>
+  <% end %>  
