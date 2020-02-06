@@ -8,9 +8,12 @@ class StoriesController < ApplicationController
        end 
     
        def create
+         user_id = current_user.id
+         @user=User.find(user_id)
          @story = Story.new(story_params.merge(user_id: current_user.id))
 
          if @story.save
+            UserMailer.welcome_email(@user).deliver
             redirect_to @story
          else
             render 'new'
